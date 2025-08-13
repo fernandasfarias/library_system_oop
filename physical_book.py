@@ -2,7 +2,7 @@ from book import Book
 
 class Physical_book(Book):
     def __init__(self, title:str, author:str, publication_year:int, availability:bool, pages:int):
-        super.__init__(title, author, publication_year, availability)
+        super().__init__(title, author, publication_year, availability)
         self.__pages = pages
     
     def get_pages(self):
