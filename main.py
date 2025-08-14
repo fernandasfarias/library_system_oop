@@ -54,7 +54,7 @@ while True:
         if successful_title == False:
             break
         
-        print('Title set successfully!')
+        print('Title added successfully!')
 
         # --- AUTHOR INPUT ---
         author = input('\nEnter the author of the book: ')
@@ -79,7 +79,7 @@ while True:
         if successful_author == False:
             break
 
-        print('Author name set successfully!')
+        print('Author name added successfully!')
 
         # --- PUBLICATION YEAR SET ---
         year = input('\nEnter the publication year of the book: ')
@@ -97,7 +97,7 @@ while True:
                             
             except TypeError as e:
                 print(f'TypeErro: {e}')
-                year = int(input('\nPlease, enter a valid publication year: '))
+                year = input('\nPlease, enter a valid publication year: ')
                 limit_year += 1
                 
             except ValueError as e:
@@ -108,7 +108,7 @@ while True:
         if successful_year == False:
             break
         
-        print('Publication year set successfully!')
+        print('Publication year added successfully!')
 
         # --- AVAILABILITY INPUT ---
 
@@ -139,12 +139,70 @@ while True:
         if successful_availability == False:
             break
             
-        print('Availability set successfully!')
+        print('Availability added successfully!')
 
-        # Checking if the attributes are correct!
-        print('Checking the data!')
-        digital_read.print_digital_book()
+        if type_book == 1:
+            number_pages = input('\nType the number of pages: ')
 
+            successful_pages = False
+            limit_pages = 0
+
+            while not successful_pages and limit_pages < 5:
+                try:
+                    physical_read.set_pages(number_pages)
+                    successful_pages = True
+                
+                except ValueError as e:
+                    print(f'ValueError: {e}')
+                    number_pages = input('\nPlease, type the number of pages again: ')
+                    limit_pages += 1
+                
+                except TypeError as e:
+                    print(f'TypeError: {e}')
+                    number_pages = input('\nPlease, type the number of pages again: ')
+                    limit_pages += 1
+                
+            if successful_pages == False:
+                break
+            
+            print('Number of pages added successfully!')
+
+        # Checking if the attributes are correct
+        print('\nChecking the data:')
+        if type_book == 1:
+            physical_read.print_physical_book()
+            library.add_book(physical_read)
+        else:
+            digital_read.print_digital_book()
+            library.add_book(digital_read)
+        print('Book added successfully!')
+    
+    elif option == 3:
+        title = input('Type the title of the book you want to remove: ')
+        
+        if library.remove_book(title) == True:
+            print('The Book was removed successfully!')
+        else:
+            print('The book was not found.')
+
+    elif option == 4:
+        library.list_books()
+
+    elif option == 5:
+        title = input('Type the title of the book: ')
+        if library.lend_book(title) == True:
+            print('Book available for lending.')
+        else:
+            print('The book is not available for lending.')
+    
+    elif option == 6:
+        title = input('Type the title of the book you want to search for: ')
+
+        if library.search_book(title) == True:
+            print('The book is in the library.')
+        else:
+            print('The book is not in the library.')
+    
 if succeed == 0:
     print('\nYou exceeded the number of attempts. Please re-enter the system.')
 else:

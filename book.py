@@ -23,7 +23,7 @@ class Book:
         return self.__publication_year
     
     def get_availability(self):
-        return self.__disponibility
+        return self.__availability
     
     # --- SETTER METHODS --- 
     
@@ -73,7 +73,7 @@ class Book:
 
     # --- PRINT ---
     def print_book(self):
-        print(f'\nTitle: {self.__title}')
+        print(f'\ntitle: {self.__title}')
         print(f'Author: {self.__author}')
         print(f'Publication year: {self.__publication_year}')
         print(f'Availability: {self.__availability}')

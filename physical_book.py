@@ -12,10 +12,10 @@ class Physical_book(Book):
         if not new_number_pages:
             raise ValueError('The number of pages is not specified.')
     
-        elif not isinstance(new_number_pages, int):
+        elif not new_number_pages.isdigit():
             raise TypeError('The number of pages is not an integer.')
         
-        self.__pages = new_number_pages
+        self.__pages = int(new_number_pages)
         return True
     
     def print_physical_book(self):
