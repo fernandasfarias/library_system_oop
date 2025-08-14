@@ -82,7 +82,7 @@ while True:
         print('Author name set successfully!')
 
         # --- PUBLICATION YEAR SET ---
-        year = int(input('\nEnter the publication year of the book: '))
+        year = input('\nEnter the publication year of the book: ')
 
         successful_year = False
         limit_year = 0
@@ -94,15 +94,15 @@ while True:
                     digital_read.set_publication_year(year)
 
                 successful_year = True
-            
-            except ValueError as e:
-                print(f'ValueError: {e}')
-                year_str = int(input('\nPlease, enter a valid publication year: '))
-                limit_year += 1
-            
+                            
             except TypeError as e:
                 print(f'TypeErro: {e}')
-                year_str = int(input('\nPlease, enter a valid publication year: '))
+                year = int(input('\nPlease, enter a valid publication year: '))
+                limit_year += 1
+                
+            except ValueError as e:
+                print(f'ValueError: {e}')
+                year = input('\nPlease, enter a valid publication year: ')
                 limit_year += 1
         
         if successful_year == False:
@@ -110,6 +110,40 @@ while True:
         
         print('Publication year set successfully!')
 
+        # --- AVAILABILITY INPUT ---
+
+        availability = input('\nEnter "True" for availability or "False" for not available: ')
+
+        successful_availability = False
+        limit_availability = 0
+
+        while not successful_availability and limit_availability < 5:
+            try:
+                if type_book == 1:
+                    physical_read.set_availability(availability)
+                else:
+                    digital_read.set_availability(availability)
+                
+                successful_availability = True
+            
+            except ValueError as e:
+                print(f'ValueError: {e}')
+                availability = input('\nPlease, type only "True" or "False": ')
+                limit_availability += 1
+            
+            except TypeError as e:
+                print(f'TypeError: {e}')
+                availability = input('\nPlease, type only "True" or "False": ')
+                limit_availability += 1
+            
+        if successful_availability == False:
+            break
+            
+        print('Availability set successfully!')
+
+        # Checking if the attributes are correct!
+        print('Checking the data!')
+        digital_read.print_digital_book()
 
 if succeed == 0:
     print('\nYou exceeded the number of attempts. Please re-enter the system.')

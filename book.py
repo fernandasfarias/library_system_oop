@@ -9,7 +9,7 @@ class Book:
         self.__code = self.__generate_code() # private method
     
     def __generate_code(self):
-        self.__code = randint(1, 500)
+        return randint(1, 500)
     
     # --- GETTER METHODS ---
         # Remember that, usually, the get method doesn't need exception handling.
@@ -48,13 +48,13 @@ class Book:
         if not new_publication_year:
             raise ValueError('The publication year is empty.')
 
-        elif new_publication_year <= 0:
-            raise ValueError('The publication year must be a positive integer.')
-
-        elif not isinstance(new_publication_year, int):
+        elif not new_publication_year.isdigit():
             raise TypeError('The publication year must be a positive integer.')
 
-        self.__publication_year = new_publication_year
+        elif int(new_publication_year) <= 0:
+            raise ValueError('The publication year must be a positive integer.')
+
+        self.__publication_year = int(new_publication_year)
         return True
     
     # I need to check if availability is a boolean value
@@ -62,15 +62,18 @@ class Book:
         if not new_availability:
             raise ValueError('The availability is empty.')
         
-        elif not isinstance(new_availability, bool):
+        elif new_availability != 'True' and new_availability != 'False':
             raise TypeError('The availability must be a boolean value (True or False).')
         
-        self.__availability = new_availability
+        if new_availability == 'True':
+            self.__availability = True
+        else:
+            self.__availability = False
         return True
 
     # --- PRINT ---
     def print_book(self):
-        print(f'Title: {self.__title}')
+        print(f'\nTitle: {self.__title}')
         print(f'Author: {self.__author}')
         print(f'Publication year: {self.__publication_year}')
         print(f'Availability: {self.__availability}')
